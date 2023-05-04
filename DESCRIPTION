@@ -1,0 +1,13 @@
+Package: ProjectDataViz
+Type: Package
+Title: Data from the ICUN
+Version: 0.1.0
+Authors@R: person("Davinder", "Singh", email = "davinderhothi2000@gmail.com", role = c("aut", "cre"))
+Maintainer: Davinder Singh <davinderhothi2000@gmail.com>
+Description: Looking at the Single Measure dataset and comparing the endangered species with multiple meaure
+License: GPL (>=2)
+Encoding: UTF-8
+LazyData: true
+Depends:
+    R (>= 4.2.2)
+RoxygenNote: 7.2.3
