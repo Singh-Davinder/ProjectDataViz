@@ -5,6 +5,7 @@
 <!-- badges: end -->
 
 To look at two datasets and seeing the trends that form from the early 2000's to present day on how much a species has been impacted to the verge of endangerment
+![ ](man/Figures/unnamed-chunk-16-1.png)
 
 ## Installation
 
