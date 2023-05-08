@@ -1,0 +1,47 @@
+---
+title: "MultipleMeasure"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{MultipleMeasure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(ape)
+library(rotl)
+library(remotes)
+library(datelife)
+```
+
+```{r}
+read.csv(file = "../data-raw/IUCN Red List Changes - 2002 to 2022 - Single Measure.csv") -> Single_Measure
+read.csv(file = "../data-raw/IUCN Red List Changes - 2002 to 2022 - Multiple Measures.csv") -> Multiple_Measure
+```
+
+```{r}
+Multiple_Measure %>%
+  rowwise() %>% 
+  mutate(endangered = Mammal.Species.Critically.Endangered * Other.Invertebrate.Species.Critically.Endangered) %>% 
+  summarize(mean_endangered = mean(endangered))
+```
+
+```{r}
+SM_tree <- tnrs_match_names(names = "Mammal")
+tol_subtree(ott_id = SM_tree$ott_id) -> Mammal_tree
+SM_tree
+```
+
+```{r}
+str( Mammal_tree)
+class( Mammal_tree)
+class(SM_tree)
+Ntip( Mammal_tree)
+```
+
+```{r fig.height= 10, fig.width= 8}
+plot.phylo(x =  Mammal_tree, cex = 0.5)
+```

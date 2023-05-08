@@ -1,0 +1,66 @@
+---
+title: "SingleMeasure"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{SingleMeasure}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(dplyr)
+library(ggplot2)
+library(ape)
+library(rotl)
+library(remotes)
+library(datelife)
+```
+
+```{r}
+read.csv(file = "../data-raw/IUCN Red List Changes - 2002 to 2022 - Single Measure.csv") -> Single_Measure
+read.csv(file = "../data-raw/IUCN Red List Changes - 2002 to 2022 - Multiple Measures.csv") -> Multiple_Measure
+```
+
+```{r}
+Single_Measure %>% 
+  filter(Class == "Amphibians" | Class == "	
+Birds" | Class == "Fishes" | Class == "Fungi & Protists") %>% 
+  group_by(Class, Metric) %>% 
+  head()
+```
+Taking a look at species that are in danger of becoming endangered
+```{r}
+#as.integer(Single_Measure$Number.of.Species)
+Single_Measure %>% 
+  group_by(Metric) %>%
+  mutate(Species = as.integer(Number.of.Species)) %>% 
+  filter(!is.na(Species)) %>% 
+ggplot(mapping = aes(x = Year, y = Species, color = Metric)) +
+  geom_point(size = 0.5) +
+  facet_wrap(~Class, scales = "free_y")
+str(Single_Measure)
+```
+Trends that show the rate of extinct for each species. Amphibians, Birds, fishes, insects, Mammals, Molluscs, Invertebrate, Plants, reptiles have graphs that show that these species are threatened to go instinct. While Fungi and protist is the largest group that has been assessed
+```{r}
+Single_Measure %>% 
+  filter(Class == "amphibians" | Class == "Mammals" | Class == "Fungi & Protists" | Class == "Mollus" | Class == "Reptiles" | Class == "Plants" | Class == "Other Invertebrates") %>% 
+  group_by(Metric) %>% 
+  mutate(Species = as.integer(Number.of.Species)) %>% 
+  filter(!is.na(Species)) %>% 
+  ggplot(mapping = aes(x = Year, y = Species, color = Metric)) +
+  geom_point(size = 1) +
+  facet_wrap(~Class, scales = "free_y")
+```
+
+```{r}
+Single_Measure %>% 
+  mutate(Species = as.integer(Number.of.Species)) %>% 
+  group_by(Year, Class) %>%
+  filter(!is.na(Species)) %>% 
+  filter(Class == "Birds") %>% 
+  summarize(bird_mean = mean(Species))
+```
+
+Taking look at birds which are closely related to reptiles and seeing how the average of birds have changed throughout the years
+

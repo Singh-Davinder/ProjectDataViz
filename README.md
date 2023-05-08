@@ -4,7 +4,7 @@
 <!-- badges: start -->
 <!-- badges: end -->
 
-The goal of ProjectDataViz is to ...
+To look at two datasets and seeing the trends that form from the early 2000's to present day on how much a species has been impacted to the verge of endangerment
 
 ## Installation
 
