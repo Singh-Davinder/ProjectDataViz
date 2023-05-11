@@ -77,6 +77,15 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"../data-raw/IUCN Red List Changes - 2002 to 2022 - Single Measure.csv"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">Single_Measure</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/utils/read.table.html" class="external-link">read.csv</a></span><span class="op">(</span>file <span class="op">=</span> <span class="st">"../data-raw/IUCN Red List Changes - 2002 to 2022 - Multiple Measures.csv"</span><span class="op">)</span> <span class="op">-&gt;</span> <span class="va">Multiple_Measure</span></span></code></pre></div>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/head.html" class="external-link">head</a></span><span class="op">(</span><span class="va">Single_Measure</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">##   Year      Class                Metric Number.of.Species</span></span>
+<span><span class="co">## 1 2002 Amphibians Critically Endangered                30</span></span>
+<span><span class="co">## 2 2003 Amphibians Critically Endangered                30</span></span>
+<span><span class="co">## 3 2004 Amphibians Critically Endangered               413</span></span>
+<span><span class="co">## 4 2006 Amphibians Critically Endangered               442</span></span>
+<span><span class="co">## 5 2007 Amphibians Critically Endangered               441</span></span>
+<span><span class="co">## 6 2008 Amphibians Critically Endangered               475</span></span></code></pre>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Single_Measure</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Class</span> <span class="op">==</span> <span class="st">"Amphibians"</span> <span class="op">|</span> <span class="va">Class</span> <span class="op">==</span> <span class="st">" </span></span>
 <span><span class="st">Birds"</span> <span class="op">|</span> <span class="va">Class</span> <span class="op">==</span> <span class="st">"Fishes"</span> <span class="op">|</span> <span class="va">Class</span> <span class="op">==</span> <span class="st">"Fungi &amp; Protists"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -94,7 +103,7 @@
 <span><span class="co">## <span style="color: #BCBCBC;">6</span>  <span style="text-decoration: underline;">2</span>008 Amphibians Critically Endangered 475</span></span></code></pre>
 <p>Taking a look at species that are in danger of becoming
 endangered</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co">#as.integer(Single_Measure$Number.of.Species)</span></span>
 <span><span class="va">Single_Measure</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Metric</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
@@ -108,8 +117,8 @@ endangered</p>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> In group 3: `Metric = "Total Assessed"`.</span></span>
 <span><span class="co">## Caused by warning:</span></span>
 <span><span class="co">## <span style="color: #BBBB00;">!</span> NAs introduced by coercion</span></span></code></pre>
-<p><img src="SingleMeasure_files/figure-html/unnamed-chunk-3-1.png" width="700"></p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<p><img src="SingleMeasure_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">Single_Measure</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## 'data.frame':    1000 obs. of  4 variables:</span></span>
 <span><span class="co">##  $ Year             : int  2002 2003 2004 2006 2007 2008 2009 2010 2011 2012 ...</span></span>
@@ -121,7 +130,7 @@ Birds, fishes, insects, Mammals, Molluscs, Invertebrate, Plants,
 reptiles have graphs that show that these species are threatened to go
 instinct. While Fungi and protist is the largest group that has been
 assessed</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Single_Measure</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/stats/filter.html" class="external-link">filter</a></span><span class="op">(</span><span class="va">Class</span> <span class="op">==</span> <span class="st">"amphibians"</span> <span class="op">|</span> <span class="va">Class</span> <span class="op">==</span> <span class="st">"Mammals"</span> <span class="op">|</span> <span class="va">Class</span> <span class="op">==</span> <span class="st">"Fungi &amp; Protists"</span> <span class="op">|</span> <span class="va">Class</span> <span class="op">==</span> <span class="st">"Mollus"</span> <span class="op">|</span> <span class="va">Class</span> <span class="op">==</span> <span class="st">"Reptiles"</span> <span class="op">|</span> <span class="va">Class</span> <span class="op">==</span> <span class="st">"Plants"</span> <span class="op">|</span> <span class="va">Class</span> <span class="op">==</span> <span class="st">"Other Invertebrates"</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Metric</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
@@ -135,8 +144,8 @@ assessed</p>
 <span><span class="co">## <span style="color: #00BBBB;">ℹ</span> In group 3: `Metric = "Total Assessed"`.</span></span>
 <span><span class="co">## Caused by warning:</span></span>
 <span><span class="co">## <span style="color: #BBBB00;">!</span> NAs introduced by coercion</span></span></code></pre>
-<p><img src="SingleMeasure_files/figure-html/unnamed-chunk-4-1.png" width="700"></p>
-<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<p><img src="SingleMeasure_files/figure-html/unnamed-chunk-5-1.png" width="700"></p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">Single_Measure</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">mutate</span><span class="op">(</span>Species <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/integer.html" class="external-link">as.integer</a></span><span class="op">(</span><span class="va">Number.of.Species</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> </span>
 <span>  <span class="fu">group_by</span><span class="op">(</span><span class="va">Year</span>, <span class="va">Class</span><span class="op">)</span> <span class="op">%&gt;%</span></span>
