@@ -22,6 +22,12 @@ read.csv(file = "../data-raw/IUCN Red List Changes - 2002 to 2022 - Single Measu
 read.csv(file = "../data-raw/IUCN Red List Changes - 2002 to 2022 - Multiple Measures.csv") -> Multiple_Measure
 ```
 
+
+```{r}
+head(Multiple_Measure)
+```
+
+
 ```{r}
 Multiple_Measure %>%
   rowwise() %>% 

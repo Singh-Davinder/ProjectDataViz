@@ -23,6 +23,10 @@ read.csv(file = "../data-raw/IUCN Red List Changes - 2002 to 2022 - Multiple Mea
 ```
 
 ```{r}
+head(Single_Measure)
+```
+
+```{r}
 Single_Measure %>% 
   filter(Class == "Amphibians" | Class == "	
 Birds" | Class == "Fishes" | Class == "Fungi & Protists") %>% 

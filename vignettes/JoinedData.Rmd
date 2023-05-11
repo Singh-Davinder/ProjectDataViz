@@ -22,6 +22,15 @@ read.csv(file = "../data-raw/IUCN Red List Changes - 2002 to 2022 - Multiple Mea
 ```
 
 ```{r}
+head(Single_Measure)
+```
+
+```{r}
+head(Multiple_Measure)
+```
+
+
+```{r}
 intersect(colnames(Single_Measure), colnames(Multiple_Measure))
 ```
 
